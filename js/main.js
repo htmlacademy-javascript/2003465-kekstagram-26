@@ -11,11 +11,12 @@ function randomize(min, max) {
 randomize(1,5);
 
 //Проверка длины строки
-function checkedStringLength(_string, _length) {
+function checkStringLength(_string, _length) {
   if (_string.length > _length) {
     return false;
   }
   return true;
 }
 
-checkedStringLength('dsgdsg', 20);
+checkStringLength('dsgdsg', 20);
+
