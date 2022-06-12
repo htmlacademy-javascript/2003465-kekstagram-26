@@ -51,17 +51,16 @@ checkStringLength('dsgdsg', 20);
 
 //Генерация комментариев
 function generateComment() {
-  const COMMENT = {};
-  COMMENT.id = randomize(1, 10000);
-  COMMENT.avatar = `img/avatar-${randomize(1, 6)}.svg`;
-  COMMENT.message = MESSAGES[randomize(0, MESSAGES.length - 1)];
-  COMMENT.name = NAMES[randomize(0, NAMES.length - 1)];
-
-  return COMMENT;
+  return {
+    id: randomize(1, 10000),
+    avatar: `img/avatar-${randomize(1, 6)}.svg`,
+    message: MESSAGES[randomize(0, MESSAGES.length - 1)],
+    name: NAMES[randomize(0, NAMES.length - 1)],
+  };
 }
 
 //Генерация объектов
-function generateObjects() {
+function generatePhotos() {
   const PHOTOS_DESCRIPTIONS = [];
   for (let i = 1; i <= 25; i++) {
     const NEW_DESCRIPTION = {};
@@ -79,4 +78,4 @@ function generateObjects() {
 }
 
 
-generateObjects();
+generatePhotos();
