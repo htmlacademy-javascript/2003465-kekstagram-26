@@ -1,8 +1,15 @@
 import './insert.js';
-import {closeBigPicture} from './big-picture.js';
+import {closeBigPictureByButton, hideComments, showBigPicture, randerCommentsList, setPhotoDescription, stopBodyScroll} from './big-picture.js';
 
-const BIG_PICTURE_CANCEL = document.querySelector('.big-picture__cancel');
+const PICTURES = document.querySelectorAll('.picture');
 
-BIG_PICTURE_CANCEL.addEventListener('click', closeBigPicture);
+PICTURES.forEach((PICTURE, i) => {
+  PICTURE.addEventListener('click', showBigPicture.bind(null, PICTURE));
+  PICTURE.addEventListener('click', hideComments);
+  PICTURE.addEventListener('click', randerCommentsList.bind(null, i));
+  PICTURE.addEventListener('click', setPhotoDescription.bind(null, i));
+  PICTURE.addEventListener('click', stopBodyScroll);
+  PICTURE.addEventListener('click', closeBigPictureByButton);
+});
 
 
