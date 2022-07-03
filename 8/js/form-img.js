@@ -28,7 +28,7 @@ UPLOAD_FORM.addEventListener('submit', (evt) => {
 });
 
 function checkHashtagLength(value) {
-  return value.length > 1 && value.length <20;
+  return value.length >= 0 && value.length <20;
 }
 
 function checkHashtagsValue() {
@@ -60,6 +60,7 @@ UPLOAD_FILE.addEventListener('change', () => {
   UPLOAD_OVERLAY.classList.remove('hidden');
   document.body.classList.add('modal-open');
   closeUploadOverlayByButton();
+  removeEventWhenFocus();
 });
 
 function closeUploadOverlay() {
@@ -67,14 +68,35 @@ function closeUploadOverlay() {
   document.body.classList.remove('modal-open');
   UPLOAD_FILE.value='';
   UPLOAD_CANCEL.removeEventListener('click', closeUploadOverlay);
+  document.removeEventListener('keydown', closeUploadOverlayByEsc);
 }
 
 function closeUploadOverlayByButton () {
   UPLOAD_CANCEL.addEventListener('click', closeUploadOverlay);
 
-  document.addEventListener('keydown', (event)=> {
-    if (event.code === 'Escape') {
-      closeUploadOverlay();
-    }
+  document.addEventListener('keydown', closeUploadOverlayByEsc);
+}
+
+function closeUploadOverlayByEsc (evt) {
+  if (evt.code === 'Escape') {
+    closeUploadOverlay();
+  }
+}
+
+function removeEventWhenFocus () {
+  TEXT_HASHTAGS.addEventListener('focus', () => {
+    document.removeEventListener('keydown', closeUploadOverlayByEsc);
+  });
+
+  TEXT_COMMENT.addEventListener('focus', () => {
+    document.removeEventListener('keydown', closeUploadOverlayByEsc);
+  });
+
+  TEXT_HASHTAGS.addEventListener('blur', () => {
+    document.addEventListener('keydown', closeUploadOverlayByEsc);
+  });
+
+  TEXT_COMMENT.addEventListener('blur', () => {
+    document.addEventListener('keydown', closeUploadOverlayByEsc);
   });
 }
