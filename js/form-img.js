@@ -28,39 +28,30 @@ UPLOAD_FORM.addEventListener('submit', (evt) => {
 });
 
 function checkHashtagLength(value) {
-  return value.length >= 0 && value.length <20;
+  return value.length >= 0 && value.length < 20;
 }
 
 function checkHashtagsValue() {
-  let bool = true;
-  if (document.querySelector('.text__hashtags').value === '') {
-    return true;
-  }
-  document.querySelector('.text__hashtags').value.split(' ').forEach((hashtag) => {
-    if(re.test(hashtag) === false) {
-      bool = false;
-    }
-  });
-  return bool;
+  return TEXT_HASHTAGS.value.split(' ').some((hashtag) => re.test(hashtag));
 }
 
 function checkHashtagsNumber() {
-  return document.querySelector('.text__hashtags').value.split(' ').length <= 5;
+  return TEXT_HASHTAGS.value.split(' ').length <= 5;
 }
 
 function checkHashtagsRepeat() {
-  return (new Set(document.querySelector('.text__hashtags').value.split(' '))).size === document.querySelector('.text__hashtags').value.split(' ').length;
+  return (new Set(TEXT_HASHTAGS.value.split(' '))).size === TEXT_HASHTAGS.value.split(' ').length;
 }
 
 function checkCommentLength () {
-  return TEXT_COMMENT.value.length <=140;
+  return TEXT_COMMENT.value.length <= 140;
 }
 
 UPLOAD_FILE.addEventListener('change', () => {
   UPLOAD_OVERLAY.classList.remove('hidden');
   document.body.classList.add('modal-open');
   closeUploadOverlayByButton();
-  removeEventWhenFocus();
+  //removeEventWhenFocus();
 });
 
 function closeUploadOverlay() {
@@ -78,25 +69,8 @@ function closeUploadOverlayByButton () {
 }
 
 function closeUploadOverlayByEsc (evt) {
-  if (evt.code === 'Escape') {
+  if (evt.code === 'Escape' && evt.target !== TEXT_HASHTAGS && evt.target !== TEXT_COMMENT) {
     closeUploadOverlay();
+    evt.stopPropagation();
   }
-}
-
-function removeEventWhenFocus () {
-  TEXT_HASHTAGS.addEventListener('focus', () => {
-    document.removeEventListener('keydown', closeUploadOverlayByEsc);
-  });
-
-  TEXT_COMMENT.addEventListener('focus', () => {
-    document.removeEventListener('keydown', closeUploadOverlayByEsc);
-  });
-
-  TEXT_HASHTAGS.addEventListener('blur', () => {
-    document.addEventListener('keydown', closeUploadOverlayByEsc);
-  });
-
-  TEXT_COMMENT.addEventListener('blur', () => {
-    document.addEventListener('keydown', closeUploadOverlayByEsc);
-  });
 }
