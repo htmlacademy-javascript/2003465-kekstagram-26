@@ -63,4 +63,4 @@ function stopBodyScroll() {
   document.body.classList.add('modal-open');
 }
 
-export {closeBigPictureByButton, hideComments, showBigPicture, randerCommentsList, setPhotoDescription, stopBodyScroll};
+export {closeBigPictureByButton, hideComments, showBigPicture, renderCommentsList, setPhotoDescription, stopBodyScroll};
