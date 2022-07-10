@@ -40,7 +40,7 @@ function showBigPicture (picture) {
   COMMENTS_COUNT.textContent = PICTURE_COMMENTS.textContent;
 }
 
-function randerCommentsList (index) {
+function renderCommentsList (index) {
 
   const COMMENT_FRAGMENT = document.createDocumentFragment();
 

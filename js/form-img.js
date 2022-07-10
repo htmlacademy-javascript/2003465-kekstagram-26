@@ -71,6 +71,6 @@ function closeUploadOverlayByButton () {
 function closeUploadOverlayByEsc (evt) {
   if (evt.code === 'Escape' && evt.target !== TEXT_HASHTAGS && evt.target !== TEXT_COMMENT) {
     closeUploadOverlay();
-    evt.stopPropagation();
+    //evt.stopPropagation();
   }
 }

@@ -1,5 +1,6 @@
 import './insert.js';
 import './form-img.js';
+import './formatting-photo.js';
 import {closeBigPictureByButton, hideComments, showBigPicture, randerCommentsList, setPhotoDescription, stopBodyScroll} from './big-picture.js';
 
 const PICTURES = document.querySelectorAll('.picture');
