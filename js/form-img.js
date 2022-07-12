@@ -32,6 +32,9 @@ function checkHashtagLength(value) {
 }
 
 function checkHashtagsValue() {
+  if (TEXT_HASHTAGS.value === '') {
+    return true;
+  }
   return TEXT_HASHTAGS.value.split(' ').some((hashtag) => re.test(hashtag));
 }
 
@@ -71,6 +74,6 @@ function closeUploadOverlayByButton () {
 function closeUploadOverlayByEsc (evt) {
   if (evt.code === 'Escape' && evt.target !== TEXT_HASHTAGS && evt.target !== TEXT_COMMENT) {
     closeUploadOverlay();
-    evt.stopPropagation();
+    //evt.stopPropagation();
   }
 }
