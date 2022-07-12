@@ -47,7 +47,7 @@ function generatePhotos() {
     NEW_DESCRIPTION.description = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.';
     NEW_DESCRIPTION.likes = randomize(MIN_LIKES, MAX_LIKES);
     NEW_DESCRIPTION.comments = [];
-    for (let j = 0; j <= randomize(0, 1); j++) {
+    for (let j = 0; j <= randomize(14, 19); j++) {
       NEW_DESCRIPTION.comments.push(generateComment());
     }
     PHOTOS_DESCRIPTIONS.push(NEW_DESCRIPTION);
