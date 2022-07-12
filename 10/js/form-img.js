@@ -32,6 +32,9 @@ function checkHashtagLength(value) {
 }
 
 function checkHashtagsValue() {
+  if (TEXT_HASHTAGS.value === '') {
+    return true;
+  }
   return TEXT_HASHTAGS.value.split(' ').some((hashtag) => re.test(hashtag));
 }
 
