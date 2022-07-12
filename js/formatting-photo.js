@@ -4,6 +4,7 @@ const SCALE_BIGGER = document.querySelector('.scale__control--bigger');
 const PHOTO_PREVIEW = document.querySelector ('.img-upload__preview img');
 const EFFECT_LEVEL_VALUE = document.querySelector('.effect-level__value');
 const EFFECT_LEVEL = document.querySelector('.effect-level__slider');
+const EFFECT_LEVEL_DIV = document.querySelector('.effect-level');
 const EFFECTS_LIST = document.querySelector('.effects__list');
 let filterType;
 let filterSymbol;
@@ -95,15 +96,15 @@ SCALE_BIGGER.addEventListener('click', () => {
 });
 
 noUiSlider.create(EFFECT_LEVEL, EFFECTS['none']);
-EFFECT_LEVEL.setAttribute('disabled', true);
+EFFECT_LEVEL_DIV.classList.add('hidden');
 
 EFFECTS_LIST.addEventListener('click', (evt) => {
   if (evt.target.type === 'radio') {
     if (evt.target.value === 'none') {
       PHOTO_PREVIEW.style.filter = '';
-      EFFECT_LEVEL.setAttribute('disabled', true);
+      EFFECT_LEVEL_DIV.classList.add('hidden');
     } else {
-      EFFECT_LEVEL.removeAttribute('disabled');
+      EFFECT_LEVEL_DIV.classList.remove('hidden');
     }
     filterType = EFFECTS[`${evt.target.value}`].filterName;
     filterSymbol = EFFECTS[`${evt.target.value}`].symbol;
