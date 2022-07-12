@@ -39,7 +39,7 @@ function showBigPicture (picture) {
   COMMENTS_LOADER.addEventListener('click', addYetFiveComments);
 }
 
-function renderCommentsList (index) {
+function randerCommentsList (index) {
 
   const COMMENT_FRAGMENT = document.createDocumentFragment();
 
@@ -91,4 +91,4 @@ function showCommentsNumber () {
   COMMENTS_NUMBER.textContent = 5;
 }
 
-export {closeBigPictureByButton, showBigPicture, renderCommentsList, setPhotoDescription, stopBodyScroll, showCommentsNumber, limitCommentsNumber};
+export {closeBigPictureByButton, showBigPicture, randerCommentsList, setPhotoDescription, stopBodyScroll, showCommentsNumber, limitCommentsNumber};
