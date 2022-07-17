@@ -1,18 +1,22 @@
-import './insert.js';
-import './form-img.js';
+import {insertPhoto} from './insert.js';
+import {setUploadForm, closeUploadOverlay} from './form-img.js';
+import {setPictureEvents} from './gallery.js';
 import './formatting-photo.js';
-import {closeBigPictureByButton, showBigPicture, randerCommentsList, setPhotoDescription, stopBodyScroll, showCommentsNumber, limitCommentsNumber} from './big-picture.js';
+import {showErrorUploadData} from './error.js';
 
-const PICTURES = document.querySelectorAll('.picture');
+fetch('https://26.javascript.pages.academy/kekstagram/data')
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+    showErrorUploadData('Не удалось загрузить фотографии с сервера, попробуйте обновить страницу');
+  })
+  .then((data) => {
+    insertPhoto(data);
+    setPictureEvents(data);
+  })
+  .catch(() => {
+    showErrorUploadData('Не удалось загрузить фотографии с сервера, попробуйте обновить страницу');
+  });
 
-PICTURES.forEach((PICTURE, i) => {
-  PICTURE.addEventListener('click', showBigPicture.bind(null, PICTURE));
-  PICTURE.addEventListener('click', randerCommentsList.bind(null, i));
-  PICTURE.addEventListener('click', setPhotoDescription.bind(null, i));
-  PICTURE.addEventListener('click', showCommentsNumber);
-  PICTURE.addEventListener('click', limitCommentsNumber);
-  PICTURE.addEventListener('click', stopBodyScroll);
-  PICTURE.addEventListener('click', closeBigPictureByButton);
-});
-
-
+setUploadForm(closeUploadOverlay);

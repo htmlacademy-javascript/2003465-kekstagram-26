@@ -118,3 +118,13 @@ EFFECT_LEVEL.noUiSlider.on('update', () => {
   EFFECT_LEVEL_VALUE.value = EFFECT_LEVEL.noUiSlider.get();
   PHOTO_PREVIEW.style.filter =  `${filterType}(${EFFECT_LEVEL_VALUE.value}${filterSymbol})`;
 });
+
+function setDefaultImgEffects () {
+  SCALE_CONTROL.value = '100%';
+  PHOTO_PREVIEW.style.transform = 'scale(1)';
+  PHOTO_PREVIEW.style.filter = '';
+  PHOTO_PREVIEW.className = '';
+  EFFECT_LEVEL_DIV.classList.add('hidden');
+}
+
+export {setDefaultImgEffects};
