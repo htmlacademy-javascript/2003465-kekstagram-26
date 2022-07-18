@@ -1,4 +1,4 @@
-import {PHOTOS} from './insert.js';
+import './insert.js';
 
 const BIG_PICTURE = document.querySelector('.big-picture');
 const BIG_PICTURE_IMG =  BIG_PICTURE.querySelector('.big-picture__img > img');
@@ -39,11 +39,11 @@ function showBigPicture (picture) {
   COMMENTS_LOADER.addEventListener('click', addYetFiveComments);
 }
 
-function randerCommentsList (index) {
+function renderCommentsList (photos, index) {
 
   const COMMENT_FRAGMENT = document.createDocumentFragment();
 
-  PHOTOS[index].comments.forEach((comment) => {
+  photos[index].comments.forEach((comment) => {
     const NEW_COMMENT = BIG_PICTURE.querySelector('.social__comment').cloneNode(true);
     NEW_COMMENT.querySelector('img').src = comment.avatar;
     NEW_COMMENT.querySelector('img').alt = comment.name;
@@ -54,8 +54,8 @@ function randerCommentsList (index) {
   BIG_PICTURE.querySelector('.social__comments').append(COMMENT_FRAGMENT);
 }
 
-function setPhotoDescription (index) {
-  PHOTO_DESCRIPTION.textContent = PHOTOS[index].description;
+function setPhotoDescription (photos, index) {
+  PHOTO_DESCRIPTION.textContent = photos[index].description;
 }
 
 function stopBodyScroll() {
@@ -88,7 +88,13 @@ function addYetFiveComments () {
 }
 
 function showCommentsNumber () {
-  COMMENTS_NUMBER.textContent = 5;
+  if (SOCIAL_COMMENTS.children.length < 5) {
+    COMMENTS_NUMBER.textContent = SOCIAL_COMMENTS.children.length;
+    COMMENTS_LOADER.classList.add('hidden');
+  } else {
+    COMMENTS_NUMBER.textContent = 5;
+    COMMENTS_LOADER.classList.remove('hidden');
+  }
 }
 
-export {closeBigPictureByButton, showBigPicture, randerCommentsList, setPhotoDescription, stopBodyScroll, showCommentsNumber, limitCommentsNumber};
+export {closeBigPictureByButton, showBigPicture, renderCommentsList, setPhotoDescription, stopBodyScroll, showCommentsNumber, limitCommentsNumber};
