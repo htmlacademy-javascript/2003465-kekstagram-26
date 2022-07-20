@@ -45,6 +45,8 @@ function setUploadForm (onSuccess) {
             showSuccessOnloadDForm();
             unblockSubmitButton();
             setDefaultImgEffects();
+            TEXT_HASHTAGS.value = '';
+            TEXT_COMMENT.value = '';
           } else {
             showErrorOnloadDForm();
           }

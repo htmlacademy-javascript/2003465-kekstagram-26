@@ -3,6 +3,7 @@ import {setUploadForm, closeUploadOverlay} from './form-img.js';
 import {setPictureEvents} from './gallery.js';
 import './formatting-photo.js';
 import {showErrorUploadData} from './error.js';
+import './load-photo.js';
 
 fetch('https://26.javascript.pages.academy/kekstagram/data')
   .then((response) => {
