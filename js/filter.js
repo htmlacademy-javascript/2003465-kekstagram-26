@@ -7,9 +7,9 @@ const FILTERS_BUTTONS = document.querySelectorAll('.img-filters__button');
 const RENDER_DELAY = 500;
 
 function changeFilters (data) {
-  const getFilterRandom = debounce(setfilterRandom , RENDER_DELAY);
-  const getFilterDefault = debounce(setfilterDefault, RENDER_DELAY);
-  const getFilterRanked = debounce(setfilterRanked, RENDER_DELAY);
+  const getFilterRandom = debounce(setFilterRandom , RENDER_DELAY);
+  const getFilterDefault = debounce(setFilterDefault, RENDER_DELAY);
+  const getFilterRanked = debounce(setFilterRanked, RENDER_DELAY);
 
   FILTERS_FORM.addEventListener('click',(evt) => {
     for (const FILTER_BUTTON of FILTERS_BUTTONS) {
@@ -58,21 +58,21 @@ function compareLikes (photo1, photo2)  {
   return LIKES2 - LIKES1;
 }
 
-function setfilterRandom (data) {
+function setFilterRandom (data) {
   const RANDOM_PHOTO = getTenRandomPhotos(data);
   deletePic();
   insertPhoto(RANDOM_PHOTO);
   setPictureEvents(RANDOM_PHOTO);
 }
 
-function setfilterRanked (data) {
+function setFilterRanked (data) {
   const RANKED_PHOTO = getRankedPhotos(data);
   deletePic();
   insertPhoto(RANKED_PHOTO);
   setPictureEvents(RANKED_PHOTO);
 }
 
-function setfilterDefault(data) {
+function setFilterDefault(data) {
   deletePic();
   insertPhoto(data);
   setPictureEvents(data);
