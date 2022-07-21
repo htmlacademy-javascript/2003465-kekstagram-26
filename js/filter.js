@@ -7,6 +7,10 @@ const FILTERS_BUTTONS = document.querySelectorAll('.img-filters__button');
 const RENDER_DELAY = 500;
 
 function changeFilters (data) {
+  const getFilterRandom = debounce(setfilterRandom , RENDER_DELAY);
+  const getFilterDefault = debounce(setfilterDefault, RENDER_DELAY);
+  const getFilterRanked = debounce(setfilterRanked, RENDER_DELAY);
+
   FILTERS_FORM.addEventListener('click',(evt) => {
     for (const FILTER_BUTTON of FILTERS_BUTTONS) {
       FILTER_BUTTON.classList.remove('img-filters__button--active');
@@ -15,15 +19,12 @@ function changeFilters (data) {
       evt.target.classList.add('img-filters__button--active');
     }
     if (evt.target.id === 'filter-random') {
-      const getFilterRandom = debounce(() => setfilterRandom (data), RENDER_DELAY);
       getFilterRandom(data);
     }
     if (evt.target.id === 'filter-default') {
-      const getFilterDefault = debounce(() => setfilterDefault (data), RENDER_DELAY);
       getFilterDefault(data);
     }
     if (evt.target.id === 'filter-discussed') {
-      const getFilterRanked = debounce(() => setfilterRanked (data), RENDER_DELAY);
       getFilterRanked(data);
     }
   });
