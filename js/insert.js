@@ -12,7 +12,6 @@ function insertPhoto (photos) {
     photoFragment.append(PICTURE_ITEM);
   });
   PICTURE_LIST.append(photoFragment);
-  return photos;
 }
 
 export {insertPhoto};
