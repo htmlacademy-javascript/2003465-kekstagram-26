@@ -4,9 +4,10 @@ import {setPictureEvents} from './gallery.js';
 
 const FILTERS_FORM = document.querySelector('.img-filters__form');
 const FILTERS_BUTTONS = document.querySelectorAll('.img-filters__button');
+const NUMBERS_RAMDOM_PHOTOS = 10;
 const RENDER_DELAY = 500;
 
-function changeFilters (data) {
+function onFiltersClick (data) {
   const getFilterRandom = debounce(setFilterRandom , RENDER_DELAY);
   const getFilterDefault = debounce(setFilterDefault, RENDER_DELAY);
   const getFilterRanked = debounce(setFilterRanked, RENDER_DELAY);
@@ -33,7 +34,7 @@ function changeFilters (data) {
 function getTenRandomPhotos (data) {
   const NEW_DATA = data.slice();
   const RANDOM_PHOTOS = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < NUMBERS_RAMDOM_PHOTOS; i++) {
     const RANDOM_INDEX = randomize(0, NEW_DATA.length - 1);
     RANDOM_PHOTOS.push(NEW_DATA[RANDOM_INDEX]);
     NEW_DATA.splice(RANDOM_INDEX, 1);
@@ -78,4 +79,4 @@ function setFilterDefault(data) {
   setPictureEvents(data);
 }
 
-export {changeFilters};
+export {onFiltersClick};

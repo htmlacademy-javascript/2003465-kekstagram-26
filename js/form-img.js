@@ -9,6 +9,9 @@ const UPLOAD_FORM = document.querySelector('.img-upload__form');
 const TEXT_HASHTAGS = document.querySelector('.text__hashtags');
 const TEXT_COMMENT = document.querySelector('.text__description');
 const SUBMIT_BUTTON = document.querySelector('.img-upload__submit');
+const MAX_HASHTAG_LENGTH = 20;
+const MAX_HASHTAG_NUMBERS = 5;
+const MAX_COMMENT_LENGTH = 140;
 const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 const PRISTINE = new Pristine(UPLOAD_FORM,{
@@ -60,7 +63,7 @@ function setUploadForm (onSuccess) {
 }
 
 function checkHashtagLength(value) {
-  return value.length >= 0 && value.length < 20;
+  return value.length >= 0 && value.length < MAX_HASHTAG_LENGTH;
 }
 
 function checkHashtagsValue() {
@@ -71,7 +74,7 @@ function checkHashtagsValue() {
 }
 
 function checkHashtagsNumber() {
-  return TEXT_HASHTAGS.value.split(' ').length <= 5;
+  return TEXT_HASHTAGS.value.split(' ').length <= MAX_HASHTAG_NUMBERS;
 }
 
 function checkHashtagsRepeat() {
@@ -79,7 +82,7 @@ function checkHashtagsRepeat() {
 }
 
 function checkCommentLength () {
-  return TEXT_COMMENT.value.length <= 140;
+  return TEXT_COMMENT.value.length <= MAX_COMMENT_LENGTH;
 }
 
 UPLOAD_FILE.addEventListener('change', () => {
