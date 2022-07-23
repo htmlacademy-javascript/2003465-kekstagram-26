@@ -6,8 +6,6 @@ import {showErrorUploadData} from './error.js';
 import {onFiltersClick} from './filter.js';
 import './load-photo.js';
 
-
-
 fetch('https://26.javascript.pages.academy/kekstagram/data')
   .then((response) => {
     if (response.ok) {
