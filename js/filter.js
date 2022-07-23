@@ -4,12 +4,13 @@ import {setPictureEvents} from './gallery.js';
 
 const FILTERS_FORM = document.querySelector('.img-filters__form');
 const FILTERS_BUTTONS = document.querySelectorAll('.img-filters__button');
+const NUMBERS_RAMDOM_PHOTOS = 10;
 const RENDER_DELAY = 500;
 
-function changeFilters (data) {
-  const getFilterRandom = debounce(setfilterRandom , RENDER_DELAY);
-  const getFilterDefault = debounce(setfilterDefault, RENDER_DELAY);
-  const getFilterRanked = debounce(setfilterRanked, RENDER_DELAY);
+function onFiltersClick (data) {
+  const getFilterRandom = debounce(setFilterRandom , RENDER_DELAY);
+  const getFilterDefault = debounce(setFilterDefault, RENDER_DELAY);
+  const getFilterRanked = debounce(setFilterRanked, RENDER_DELAY);
 
   FILTERS_FORM.addEventListener('click',(evt) => {
     for (const FILTER_BUTTON of FILTERS_BUTTONS) {
@@ -33,7 +34,7 @@ function changeFilters (data) {
 function getTenRandomPhotos (data) {
   const NEW_DATA = data.slice();
   const RANDOM_PHOTOS = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < NUMBERS_RAMDOM_PHOTOS; i++) {
     const RANDOM_INDEX = randomize(0, NEW_DATA.length - 1);
     RANDOM_PHOTOS.push(NEW_DATA[RANDOM_INDEX]);
     NEW_DATA.splice(RANDOM_INDEX, 1);
@@ -58,24 +59,24 @@ function compareLikes (photo1, photo2)  {
   return LIKES2 - LIKES1;
 }
 
-function setfilterRandom (data) {
+function setFilterRandom (data) {
   const RANDOM_PHOTO = getTenRandomPhotos(data);
   deletePic();
   insertPhoto(RANDOM_PHOTO);
   setPictureEvents(RANDOM_PHOTO);
 }
 
-function setfilterRanked (data) {
+function setFilterRanked (data) {
   const RANKED_PHOTO = getRankedPhotos(data);
   deletePic();
   insertPhoto(RANKED_PHOTO);
   setPictureEvents(RANKED_PHOTO);
 }
 
-function setfilterDefault(data) {
+function setFilterDefault(data) {
   deletePic();
   insertPhoto(data);
   setPictureEvents(data);
 }
 
-export {changeFilters};
+export {onFiltersClick};

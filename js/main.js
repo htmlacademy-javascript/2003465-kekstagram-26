@@ -3,9 +3,8 @@ import {setUploadForm, closeUploadOverlay} from './form-img.js';
 import {setPictureEvents} from './gallery.js';
 import './formatting-photo.js';
 import {showErrorUploadData} from './error.js';
+import {onFiltersClick} from './filter.js';
 import './load-photo.js';
-import {changeFilters} from './filter.js';
-
 
 fetch('https://26.javascript.pages.academy/kekstagram/data')
   .then((response) => {
@@ -18,7 +17,7 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
     document.querySelector('.img-filters--inactive').style.opacity = 1;
     insertPhoto(data);
     setPictureEvents(data);
-    changeFilters(data);
+    onFiltersClick(data);
   })
   .catch(() => {
     showErrorUploadData('Не удалось загрузить фотографии с сервера, попробуйте обновить страницу');
