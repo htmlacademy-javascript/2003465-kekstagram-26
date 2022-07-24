@@ -11,20 +11,20 @@ const PHOTO_DESCRIPTION = BIG_PICTURE.querySelector('.social__caption');
 const BIG_PICTURE_CANCEL = document.querySelector('.big-picture__cancel');
 let lastComment = 5;
 
-function closeBigPicture() {
+function onBigPictureCancelClick() {
   BIG_PICTURE.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  BIG_PICTURE_CANCEL.removeEventListener('click', closeBigPicture);
-  COMMENTS_LOADER.removeEventListener('click', addYetFiveComments);
+  BIG_PICTURE_CANCEL.removeEventListener('click', onBigPictureCancelClick);
+  COMMENTS_LOADER.removeEventListener('click', onCommentsLoaderClick);
   COMMENTS_LOADER.classList.remove('hidden');
 }
 
 function closeBigPictureByButton () {
-  BIG_PICTURE_CANCEL.addEventListener('click', closeBigPicture);
+  BIG_PICTURE_CANCEL.addEventListener('click', onBigPictureCancelClick);
 
   document.addEventListener('keydown', (event)=> {
     if (event.code === 'Escape') {
-      closeBigPicture();
+      onBigPictureCancelClick();
     }
   });
 }
@@ -36,7 +36,7 @@ function showBigPicture (picture) {
   BIG_PICTURE_IMG.src = picture.querySelector('.picture__img').src;
   LIKES_COUNT.textContent = PICTURE_LIKES.textContent;
   COMMENTS_COUNT.textContent = PICTURE_COMMENTS.textContent;
-  COMMENTS_LOADER.addEventListener('click', addYetFiveComments);
+  COMMENTS_LOADER.addEventListener('click', onCommentsLoaderClick);
 }
 
 function renderCommentsList (photos, index) {
@@ -70,7 +70,7 @@ function limitCommentsNumber () {
   }
 }
 
-function addYetFiveComments () {
+function onCommentsLoaderClick () {
   if ((SOCIAL_COMMENTS.children.length - lastComment) < 5) {
     for (let i = lastComment; i < SOCIAL_COMMENTS.children.length; i++) {
       SOCIAL_COMMENTS.children[i].classList.remove('hidden');
@@ -85,6 +85,9 @@ function addYetFiveComments () {
   }
   lastComment += 5;
   COMMENTS_NUMBER.textContent = lastComment;
+  if (+ COMMENTS_NUMBER.textContent === SOCIAL_COMMENTS.children.length) {
+    COMMENTS_LOADER.classList.add('hidden');
+  }
 }
 
 function showCommentsNumber () {
