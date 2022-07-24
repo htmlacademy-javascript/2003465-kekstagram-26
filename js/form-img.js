@@ -10,9 +10,10 @@ const TEXT_HASHTAGS = document.querySelector('.text__hashtags');
 const TEXT_COMMENT = document.querySelector('.text__description');
 const SUBMIT_BUTTON = document.querySelector('.img-upload__submit');
 const MAX_HASHTAG_LENGTH = 20;
+const MIN_HASHTAG_LENGTH = 0;
 const MAX_HASHTAG_NUMBERS = 5;
 const MAX_COMMENT_LENGTH = 140;
-const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+const REGULAR_EXPRESSION = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 const PRISTINE = new Pristine(UPLOAD_FORM,{
   classTo: 'img-upload__field-wrapper',
@@ -55,7 +56,7 @@ function setUploadForm (onSuccess) {
           }
         })
         .catch(() => {
-          closeUploadOverlay();
+          closeByError();
           showErrorOnloadDForm();
         });
     }
@@ -63,14 +64,14 @@ function setUploadForm (onSuccess) {
 }
 
 function checkHashtagLength(value) {
-  return value.length >= 0 && value.length < MAX_HASHTAG_LENGTH;
+  return value.length >= MIN_HASHTAG_LENGTH && value.length < MAX_HASHTAG_LENGTH;
 }
 
 function checkHashtagsValue() {
   if (TEXT_HASHTAGS.value === '') {
     return true;
   }
-  return TEXT_HASHTAGS.value.split(' ').some((hashtag) => re.test(hashtag));
+  return TEXT_HASHTAGS.value.split(' ').some((hashtag) => REGULAR_EXPRESSION.test(hashtag));
 }
 
 function checkHashtagsNumber() {
@@ -91,23 +92,32 @@ UPLOAD_FILE.addEventListener('change', () => {
   closeUploadOverlayByButton();
 });
 
-function closeUploadOverlay() {
+function onUploadCancelClick() {
   UPLOAD_OVERLAY.classList.add('hidden');
   document.body.classList.remove('modal-open');
   UPLOAD_FILE.value='';
-  UPLOAD_CANCEL.removeEventListener('click', closeUploadOverlay);
-  document.removeEventListener('keydown', closeUploadOverlayByEsc);
+  UPLOAD_CANCEL.removeEventListener('click', onUploadCancelClick);
+  document.removeEventListener('keydown', onEscClick);
+  setDefaultImgEffects();
+}
+
+function closeByError() {
+  UPLOAD_OVERLAY.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  UPLOAD_FILE.value='';
+  UPLOAD_CANCEL.removeEventListener('click', onUploadCancelClick);
+  document.removeEventListener('keydown', onEscClick);
 }
 
 function closeUploadOverlayByButton () {
-  UPLOAD_CANCEL.addEventListener('click', closeUploadOverlay);
+  UPLOAD_CANCEL.addEventListener('click', onUploadCancelClick);
 
-  document.addEventListener('keydown', closeUploadOverlayByEsc);
+  document.addEventListener('keydown', onEscClick);
 }
 
-function closeUploadOverlayByEsc (evt) {
+function onEscClick (evt) {
   if (evt.code === 'Escape' && evt.target !== TEXT_HASHTAGS && evt.target !== TEXT_COMMENT) {
-    closeUploadOverlay();
+    onUploadCancelClick();
   }
 }
 
@@ -121,4 +131,4 @@ function unblockSubmitButton () {
   SUBMIT_BUTTON.textContent = 'Сохранить';
 }
 
-export {setUploadForm, closeUploadOverlay};
+export {setUploadForm, onUploadCancelClick};

@@ -1,6 +1,7 @@
 const ERROR_TEMPLATE = document.querySelector('#error').content;
 const ERROR_ITEM = ERROR_TEMPLATE.querySelector('.error');
 const ERROR_FRAGMENT = document.createDocumentFragment();
+const ERROR_VISIBLE_TIME = 5000;
 
 function showErrorUploadData (message) {
   const ERROR_CONTAINER = document.createElement('div');
@@ -19,7 +20,7 @@ function showErrorUploadData (message) {
 
   setTimeout(() => {
     ERROR_CONTAINER.remove();
-  }, 5000);
+  }, ERROR_VISIBLE_TIME);
 }
 
 function showErrorOnloadDForm() {
@@ -28,20 +29,20 @@ function showErrorOnloadDForm() {
   document.body.append(ERROR_FRAGMENT);
   const ERROR_BUTTON = document.querySelector('.error__button');
 
-  ERROR_BUTTON.addEventListener('click', closeErrorModal);
+  ERROR_BUTTON.addEventListener('click', onErrorButtonClick);
   document.addEventListener('keydown', (evt) => {
     if (evt.code === 'Escape') {
-      closeErrorModal();
+      onErrorButtonClick();
     }
   });
   document.addEventListener('click', (evt) => {
     if (evt.target === ERROR_MODAL) {
-      closeErrorModal();
+      onErrorButtonClick();
     }
   });
 }
 
-function closeErrorModal() {
+function onErrorButtonClick() {
   document.querySelector('.error').remove();
 }
 

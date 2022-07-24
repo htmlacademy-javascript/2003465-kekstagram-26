@@ -6,6 +6,9 @@ const EFFECT_LEVEL_VALUE = document.querySelector('.effect-level__value');
 const EFFECT_LEVEL = document.querySelector('.effect-level__slider');
 const EFFECT_LEVEL_DIV = document.querySelector('.effect-level');
 const EFFECTS_LIST = document.querySelector('.effects__list');
+const MIN_SCALE = 25;
+const MAX_SCALE = 100;
+const STEP_SCALE = 25;
 let filterType;
 let filterSymbol;
 const EFFECTS = {
@@ -79,8 +82,8 @@ const EFFECTS = {
 
 SCALE_SMALLER.addEventListener('click', () => {
   let numberScaleValue = Number(SCALE_CONTROL.value.replace('%',''));
-  numberScaleValue -= 25;
-  if (numberScaleValue >= 0 && numberScaleValue <= 100){
+  numberScaleValue -= STEP_SCALE;
+  if (numberScaleValue >= MIN_SCALE && numberScaleValue <= MAX_SCALE){
     PHOTO_PREVIEW.style.transform= `scale(${numberScaleValue/100})`;
     SCALE_CONTROL.value = `${String(numberScaleValue)}%`;
   }
@@ -88,8 +91,8 @@ SCALE_SMALLER.addEventListener('click', () => {
 
 SCALE_BIGGER.addEventListener('click', () => {
   let numberScaleValue = Number(SCALE_CONTROL.value.replace('%',''));
-  numberScaleValue += 25;
-  if (numberScaleValue >= 0 && numberScaleValue <= 100){
+  numberScaleValue += STEP_SCALE;
+  if (numberScaleValue >= MIN_SCALE && numberScaleValue <= MAX_SCALE){
     PHOTO_PREVIEW.style.transform = `scale(${numberScaleValue/100})`;
     SCALE_CONTROL.value = `${String(numberScaleValue)}%`;
   }
