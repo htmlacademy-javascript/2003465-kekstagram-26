@@ -1,17 +1,17 @@
-const PICTURE_LIST = document.querySelector('.pictures');
-const PICTURE_TEMPLATE = document.querySelector('#picture').content;
-const PICTURE = PICTURE_TEMPLATE.querySelector('a');
+const pictureList = document.querySelector('.pictures');
+const pictureTemplate = document.querySelector('#picture').content;
+const picture = pictureTemplate.querySelector('a');
 const photoFragment = document.createDocumentFragment();
 
 function insertPhoto (photos) {
   photos.forEach(({url, comments, likes}) => {
-    const PICTURE_ITEM = PICTURE.cloneNode(true);
-    PICTURE_ITEM.querySelector('.picture__img').src = url;
-    PICTURE_ITEM.querySelector('.picture__comments').textContent = comments.length;
-    PICTURE_ITEM.querySelector('.picture__likes').textContent = likes;
-    photoFragment.append(PICTURE_ITEM);
+    const pictureItem = picture.cloneNode(true);
+    pictureItem.querySelector('.picture__img').src = url;
+    pictureItem.querySelector('.picture__comments').textContent = comments.length;
+    pictureItem.querySelector('.picture__likes').textContent = likes;
+    photoFragment.append(pictureItem);
   });
-  PICTURE_LIST.append(photoFragment);
+  pictureList.append(photoFragment);
 }
 
 export {insertPhoto};

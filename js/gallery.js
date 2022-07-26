@@ -1,15 +1,15 @@
 import {closeBigPictureByButton, showBigPicture, renderCommentsList, setPhotoDescription, stopBodyScroll, showCommentsNumber, limitCommentsNumber} from './big-picture.js';
 
 function setPictureEvents (data) {
-  const PICTURES = document.querySelectorAll('.picture');
-  PICTURES.forEach((PICTURE, i) => {
-    PICTURE.addEventListener('click', showBigPicture.bind(null, PICTURE));
-    PICTURE.addEventListener('click', renderCommentsList.bind(null, data, i));
-    PICTURE.addEventListener('click', setPhotoDescription.bind(null, data, i));
-    PICTURE.addEventListener('click', showCommentsNumber);
-    PICTURE.addEventListener('click', limitCommentsNumber);
-    PICTURE.addEventListener('click', stopBodyScroll);
-    PICTURE.addEventListener('click', closeBigPictureByButton);
+  const pictures = document.querySelectorAll('.picture');
+  pictures.forEach((picture, i) => {
+    picture.addEventListener('click', showBigPicture.bind(null, picture));
+    picture.addEventListener('click', renderCommentsList.bind(null, data, i));
+    picture.addEventListener('click', setPhotoDescription.bind(null, data, i));
+    picture.addEventListener('click', showCommentsNumber);
+    picture.addEventListener('click', limitCommentsNumber);
+    picture.addEventListener('click', stopBodyScroll);
+    picture.addEventListener('click', closeBigPictureByButton);
   });
 }
 
