@@ -1,11 +1,11 @@
-const SCALE_CONTROL = document.querySelector('.scale__control--value');
-const SCALE_SMALLER = document.querySelector('.scale__control--smaller');
-const SCALE_BIGGER = document.querySelector('.scale__control--bigger');
-const PHOTO_PREVIEW = document.querySelector ('.img-upload__preview img');
-const EFFECT_LEVEL_VALUE = document.querySelector('.effect-level__value');
-const EFFECT_LEVEL = document.querySelector('.effect-level__slider');
-const EFFECT_LEVEL_DIV = document.querySelector('.effect-level');
-const EFFECTS_LIST = document.querySelector('.effects__list');
+const scaleControl = document.querySelector('.scale__control--value');
+const scaleSmaller = document.querySelector('.scale__control--smaller');
+const scaleBigger = document.querySelector('.scale__control--bigger');
+const photoPreview = document.querySelector ('.img-upload__preview img');
+const effectLevelValue = document.querySelector('.effect-level__value');
+const effectLevel = document.querySelector('.effect-level__slider');
+const effectLevelDiv = document.querySelector('.effect-level');
+const effectsList = document.querySelector('.effects__list');
 const MIN_SCALE = 25;
 const MAX_SCALE = 100;
 const STEP_SCALE = 25;
@@ -80,54 +80,54 @@ const EFFECTS = {
   }
 };
 
-SCALE_SMALLER.addEventListener('click', () => {
-  let numberScaleValue = Number(SCALE_CONTROL.value.replace('%',''));
+scaleSmaller.addEventListener('click', () => {
+  let numberScaleValue = Number(scaleControl.value.replace('%',''));
   numberScaleValue -= STEP_SCALE;
   if (numberScaleValue >= MIN_SCALE && numberScaleValue <= MAX_SCALE){
-    PHOTO_PREVIEW.style.transform= `scale(${numberScaleValue/100})`;
-    SCALE_CONTROL.value = `${String(numberScaleValue)}%`;
+    photoPreview.style.transform= `scale(${numberScaleValue/100})`;
+    scaleControl.value = `${String(numberScaleValue)}%`;
   }
 });
 
-SCALE_BIGGER.addEventListener('click', () => {
-  let numberScaleValue = Number(SCALE_CONTROL.value.replace('%',''));
+scaleBigger.addEventListener('click', () => {
+  let numberScaleValue = Number(scaleControl.value.replace('%',''));
   numberScaleValue += STEP_SCALE;
   if (numberScaleValue >= MIN_SCALE && numberScaleValue <= MAX_SCALE){
-    PHOTO_PREVIEW.style.transform = `scale(${numberScaleValue/100})`;
-    SCALE_CONTROL.value = `${String(numberScaleValue)}%`;
+    photoPreview.style.transform = `scale(${numberScaleValue/100})`;
+    scaleControl.value = `${String(numberScaleValue)}%`;
   }
 });
 
-noUiSlider.create(EFFECT_LEVEL, EFFECTS['none']);
-EFFECT_LEVEL_DIV.classList.add('hidden');
+noUiSlider.create(effectLevel, EFFECTS['none']);
+effectLevelDiv.classList.add('hidden');
 
-EFFECTS_LIST.addEventListener('click', (evt) => {
+effectsList.addEventListener('click', (evt) => {
   if (evt.target.type === 'radio') {
     if (evt.target.value === 'none') {
-      PHOTO_PREVIEW.style.filter = '';
-      EFFECT_LEVEL_DIV.classList.add('hidden');
+      photoPreview.style.filter = '';
+      effectLevelDiv.classList.add('hidden');
     } else {
-      EFFECT_LEVEL_DIV.classList.remove('hidden');
+      effectLevelDiv.classList.remove('hidden');
     }
     filterType = EFFECTS[`${evt.target.value}`].filterName;
     filterSymbol = EFFECTS[`${evt.target.value}`].symbol;
-    PHOTO_PREVIEW.className = '';
-    PHOTO_PREVIEW.classList.add(`effects__preview--${evt.target.value}`);
-    EFFECT_LEVEL.noUiSlider.updateOptions(EFFECTS[`${evt.target.value}`]);
+    photoPreview.className = '';
+    photoPreview.classList.add(`effects__preview--${evt.target.value}`);
+    effectLevel.noUiSlider.updateOptions(EFFECTS[`${evt.target.value}`]);
   }
 });
 
-EFFECT_LEVEL.noUiSlider.on('update', () => {
-  EFFECT_LEVEL_VALUE.value = EFFECT_LEVEL.noUiSlider.get();
-  PHOTO_PREVIEW.style.filter =  `${filterType}(${EFFECT_LEVEL_VALUE.value}${filterSymbol})`;
+effectLevel.noUiSlider.on('update', () => {
+  effectLevelValue.value = effectLevel.noUiSlider.get();
+  photoPreview.style.filter =  `${filterType}(${effectLevelValue.value}${filterSymbol})`;
 });
 
 function setDefaultImgEffects () {
-  SCALE_CONTROL.value = '100%';
-  PHOTO_PREVIEW.style.transform = 'scale(1)';
-  PHOTO_PREVIEW.style.filter = '';
-  PHOTO_PREVIEW.className = '';
-  EFFECT_LEVEL_DIV.classList.add('hidden');
+  scaleControl.value = '100%';
+  photoPreview.style.transform = 'scale(1)';
+  photoPreview.style.filter = '';
+  photoPreview.className = '';
+  effectLevelDiv.classList.add('hidden');
 }
 
 export {setDefaultImgEffects};

@@ -1,42 +1,42 @@
-const ERROR_TEMPLATE = document.querySelector('#error').content;
-const ERROR_ITEM = ERROR_TEMPLATE.querySelector('.error');
-const ERROR_FRAGMENT = document.createDocumentFragment();
+const errorTemplate = document.querySelector('#error').content;
+const errorItem = errorTemplate.querySelector('.error');
+const errorFragment = document.createDocumentFragment();
 const ERROR_VISIBLE_TIME = 5000;
 
 function showErrorUploadData (message) {
-  const ERROR_CONTAINER = document.createElement('div');
-  ERROR_CONTAINER.style.zIndex = 100;
-  ERROR_CONTAINER.style.position = 'absolute';
-  ERROR_CONTAINER.style.left = 0;
-  ERROR_CONTAINER.style.top = 0;
-  ERROR_CONTAINER.style.padding = '10px';
-  ERROR_CONTAINER.style.fontSize = '30px';
-  ERROR_CONTAINER.style.textAlign = 'center';
-  ERROR_CONTAINER.style.backgroundColor = 'red';
-  ERROR_CONTAINER.style.lineHeight = '30px';
-  ERROR_CONTAINER.textContent = message;
+  const errorContainer = document.createElement('div');
+  errorContainer.style.zIndex = 100;
+  errorContainer.style.position = 'absolute';
+  errorContainer.style.left = 0;
+  errorContainer.style.top = 0;
+  errorContainer.style.padding = '10px';
+  errorContainer.style.fontSize = '30px';
+  errorContainer.style.textAlign = 'center';
+  errorContainer.style.backgroundColor = 'red';
+  errorContainer.style.lineHeight = '30px';
+  errorContainer.textContent = message;
 
-  document.body.append(ERROR_CONTAINER);
+  document.body.append(errorContainer);
 
   setTimeout(() => {
-    ERROR_CONTAINER.remove();
+    errorContainer.remove();
   }, ERROR_VISIBLE_TIME);
 }
 
 function showErrorOnloadDForm() {
-  const ERROR_MODAL = ERROR_ITEM.cloneNode(true);
-  ERROR_FRAGMENT.append(ERROR_MODAL);
-  document.body.append(ERROR_FRAGMENT);
-  const ERROR_BUTTON = document.querySelector('.error__button');
+  const errorModal = errorItem.cloneNode(true);
+  errorFragment.append(errorModal);
+  document.body.append(errorFragment);
+  const errorButton = document.querySelector('.error__button');
 
-  ERROR_BUTTON.addEventListener('click', onErrorButtonClick);
+  errorButton.addEventListener('click', onErrorButtonClick);
   document.addEventListener('keydown', (evt) => {
     if (evt.code === 'Escape') {
       onErrorButtonClick();
     }
   });
   document.addEventListener('click', (evt) => {
-    if (evt.target === ERROR_MODAL) {
+    if (evt.target === errorModal) {
       onErrorButtonClick();
     }
   });
